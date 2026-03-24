@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Wobble Landing Page
 
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/10d43a34-6580-452d-a927-fe55bc866ab1
+Single-page Next.js landing page for Wobble panna cotta flavours, gifting, and WhatsApp ordering.
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+Prerequisite: Node.js 20+
 
+1. Install dependencies with `npm install`
+2. Start the dev server with `npm run dev`
+3. Open `http://localhost:3000`
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Available Scripts
+
+- `npm run dev` starts the development server
+- `npm run build` creates the production build
+- `npm run start` serves the production build
+- `npm run lint` runs ESLint
+- `npm run clean` removes the local `.next` build output
+
+## Environment Variables
+
+No environment variables are required for the current landing page.

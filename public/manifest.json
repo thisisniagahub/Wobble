@@ -1,0 +1,23 @@
+{
+  "name": "Wobble. Premium Panna Cotta",
+  "short_name": "Wobble.",
+  "description": "Handcrafted daily premium Malaysian panna cotta desserts.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#FF6B9D",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/products/mango.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/products/mango.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,1 +1,170 @@
 @import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --animate-shimmer: shimmer 2s linear infinite;
+}
+
+@layer utilities {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 150px;
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+}
+
+
+/* ============================================ */
+/* Cinematic Parallax Jar Transition Keyframes  */
+/* ============================================ */
+
+/* Jar exit — slides left with 3D rotation */
+@keyframes cine-jar-exit {
+  0%   { transform: translateX(0) rotateY(0deg) scale(1); opacity: 1; filter: blur(0px) brightness(1); }
+  30%  { transform: translateX(-40px) rotateY(15deg) scale(0.95); opacity: 0.8; filter: blur(2px) brightness(1.2); }
+  100% { transform: translateX(-200px) rotateY(45deg) scale(0.5); opacity: 0; filter: blur(15px) brightness(0.5); }
+}
+
+/* Jar enter — slides in from right with spring overshoot */
+@keyframes cine-jar-enter {
+  0%   { transform: translateX(200px) rotateY(-45deg) scale(0.5); opacity: 0; filter: blur(15px) brightness(0.5); }
+  60%  { transform: translateX(10px) rotateY(-5deg) scale(1.02); opacity: 0.9; filter: blur(2px) brightness(1.1); }
+  80%  { transform: translateX(-5px) rotateY(2deg) scale(1.01); opacity: 1; filter: blur(0px) brightness(1); }
+  100% { transform: translateX(0) rotateY(0deg) scale(1); opacity: 1; filter: blur(0px) brightness(1); }
+}
+
+/* Text exit — slides up-left with fade */
+@keyframes cine-text-exit {
+  0%   { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-30px) translateX(-15px); opacity: 0; }
+}
+
+/* Text enter — slides up from below with spring */
+@keyframes cine-text-enter {
+  0%   { transform: translateY(40px) translateX(15px); opacity: 0; }
+  60%  { transform: translateY(-3px) translateX(-2px); opacity: 1; }
+  100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+
+/* Sparkle particle burst */
+@keyframes sparkle-burst {
+  0%   { transform: scale(0) translate(0, 0); opacity: 1; }
+  50%  { opacity: 0.8; }
+  100% { transform: scale(1) translate(var(--sx, 0px), var(--sy, 0px)); opacity: 0; }
+}
+
+/* Glow pulse under jar during transition */
+@keyframes glow-pulse {
+  0%   { transform: translateX(-50%) scale(1); opacity: 0.3; }
+  50%  { transform: translateX(-50%) scale(1.6); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+}
+
+/* Gradient border spin for active flavor */
+@keyframes gradient-spin {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Subtle pulse for active flavor ring */
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+
+/* Neon glow pulse for all-flavors cards */
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.1); }
+}
+
+/* Button Shimmer Sweep Effect */
+@keyframes shimmer {
+  from {
+    backgroundPosition: 200% 0;
+  }
+  to {
+    backgroundPosition: -200% 0;
+  }
+}
+
+/* ============================================ */
+/* Accessibility: Reduced Motion Support        */
+/* ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Allow essential animations */
+  .motion-safe\\:animate-spin {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================ */
+/* Touch Optimization: Better Mobile Interaction */
+/* ============================================ */
+
+/* Prevent double-tap zoom delay */
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* PWA NATIVE FEEL */
+html, body {
+  overscroll-behavior-y: none;
+  background: var(--color-background, #0a0a0a);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Safe Area Insets for Notched Devices */
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.custom-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* ============================================ */
+/* Typography Improvements                      */
+/* ============================================ */
+
+/* Prevent widows in headings */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: normal;
+}
+
+/* Better paragraph wrapping */
+p {
+  text-wrap: normal;
+}
+
+/* Tabular numbers for prices and stats */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
